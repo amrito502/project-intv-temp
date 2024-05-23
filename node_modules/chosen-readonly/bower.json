@@ -1,0 +1,31 @@
+{
+  "name": "chosen-readonly",
+  "version": "1.0.6",
+  "description": "Readonly support for Chosen selects",
+  "main": "dist/chosen-readonly.min.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:westonganger/chosen-readonly.git"
+  },
+  "keywords": [
+    "readonly",
+    "chosen",
+    "select",
+    "jquery",
+    "javascript",
+    "js"
+  ],
+  "author": "Weston Ganger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/westonganger/chosen-readonly/issues"
+  },
+  "homepage": "https://github.com/westonganger/chosen-readonly",
+  "dependencies": {
+    "chosen": ">=1.0.0"
+  },
+  "devDependencies": {}
+}

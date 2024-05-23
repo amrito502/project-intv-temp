@@ -1,0 +1,31 @@
+.table {
+
+    thead,
+    tfoot {
+        th {
+            background-color: #009688;
+        }
+    }
+}
+
+.chosen-container {
+    width: 100% !important;
+}
+
+.chosen-single {
+    height: 38px !important;
+    padding: 4px 6px !important;
+}
+
+@media (max-width: 575.98px) {
+    .btn {
+        display: block;
+        width: 100%;
+    }
+}
+
+
+.FolderIconCss{
+    font-size: 70px;
+    color: #009688;
+}

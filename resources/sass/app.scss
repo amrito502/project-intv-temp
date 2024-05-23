@@ -1,0 +1,50 @@
+// Fonts
+// @import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+// @import "variables";
+
+// Bootstrap
+// @import '~bootstrap/scss/bootstrap';
+
+@import "./theme_style.css";
+@import "./style";
+
+.input-container input {
+    border: none;
+    box-sizing: border-box;
+    outline: 0;
+    padding: .75rem;
+    position: relative;
+    width: 100%;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
+.app-nav__item {
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .mobile-changes {
+        width: 200%;
+    }
+}
+
+label {
+    font-weight: bold;
+}

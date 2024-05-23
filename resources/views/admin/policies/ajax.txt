@@ -1,0 +1,106 @@
+<script type="text/javascript">
+
+function nearBottomOfPage() {
+    return $(window).scrollTop() > $(document).height() - $(window).height() - 200;
+}
+$(document).ready(function () {
+    loading = false
+    $(window).scroll(function(){   
+
+        if (loading) {
+            return;
+        }
+        var page = $('.endless-scroll').data('next-page');
+
+        if(page !== null){
+
+            if(nearBottomOfPage()) {
+                loading=true;
+                $.ajax({
+                    url: page,
+                    type: 'get',
+                    dataType: 'script',
+                    success: function(data) {
+                        var x = $.parseJSON(data);
+                        loading=false;
+                        $('.scrollImage').append(x.images);
+                        $('.endless-scroll').data('next-page', x.next_page); 
+                    }
+                });
+            }
+        }
+        $('.image-popup-vertical-fit').magnificPopup({
+            type: 'image',
+            closeOnContentClick: true,
+            mainClass: 'mfp-img-mobile',
+            image: {
+                verticalFit: true
+            }
+
+        });
+    });
+})
+
+function fameUpdate(selected, id){
+    $.ajax({
+        url: "{{ route('images.fameAjax') }}",
+        type: 'get',
+        data: {id: id},
+        success: function(data) {
+            if(data%2==0) {
+                $(selected).find('i').removeClass( "mdi-heart" );
+                $(selected).find('i').addClass( "mdi-heart-outline" );
+                swal("Disliked!", "You disliked this!", "success");
+            } else {                    
+                $(selected).find('i').removeClass( "mdi-heart-outline" );
+                $(selected).find('i').addClass( "mdi-heart" );
+                swal("Liked!", "You liked this!", "success");
+            }
+        }
+    });
+}
+
+function addToCollection(imageId, categoryId, categoryName){
+    $.ajax({
+        url: "{{ route('images.collectionAjax') }}",
+        type: 'get',
+        data: {image_id: imageId, category_id: categoryId},
+        success: function(data) {     
+            if(data == 1){               
+                swal("Successfull!", "You successfully added to "+categoryName+" category!", "success");
+            } else {
+                swal("Exist!", "This image already exist in "+categoryName+" category!", "warning");                    
+            }
+        }
+    });
+}
+
+function deleteImage(selected, imageId){
+    swal({   
+        title: "Are you sure?",   
+        text: "The image will move to trash!",   
+        type: "warning",   
+        showCancelButton: true,   
+        confirmButtonColor: "#DD6B55",   
+        confirmButtonText: "Yes, do it!",   
+        cancelButtonText: "No, cancel it!",   
+        closeOnConfirm: false,   
+        closeOnCancel: false 
+    }, function(isConfirm){   
+        if (isConfirm) {  
+            $.ajax({
+                url: "{{ route('images.deleteAjax') }}",
+                type: 'get',
+                data: {id: imageId},
+                success: function(data) {              
+                    swal("Successfull!", "You successfully trashed the image!", "success");
+                    $(selected).parent().parent().parent().parent().parent().parent().parent().parent().parent().remove()
+                }
+            });  
+        } else {     
+            swal("Cancelled", "Your image is safe :)", "error");   
+        } 
+    });
+
+}
+</script>
